@@ -14,6 +14,9 @@ public class Favorite extends Entertainment{
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
 
+    /**
+     * Printar ut menyn för Favorite.
+     */
     public static void printFavoriteMenu() {
         System.out.println(">---------FAVORITE MENU---------<");
         System.out.println("0. Show favorites Menu");
@@ -26,6 +29,16 @@ public class Favorite extends Entertainment{
         System.out.println("7. Back");
         System.out.println(">-------------------------------<");
     }
+
+    /**
+     * En metod som används för att skapa ett inlägg i favoriteList
+     * @param type representerar String type i ArrayList
+     * @param name representerar String name i ArrayList
+     * @param genre representerar String genre i ArrayList
+     * @param year representerar String year i ArrayList
+     * @param rating representerar String rating i ArrayList
+     * @return returnerar nya värden i listan.
+     */
     public static Favorite createFavorite (String type, String name, String genre, String year, String rating) {
         return new Favorite(type, name, genre, year, rating); }
 }

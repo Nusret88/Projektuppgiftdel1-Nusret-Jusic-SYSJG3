@@ -33,8 +33,8 @@ public class Entertainment {
 
     /**
      * RandomPick slumpar mellan 1-3 och beroende på vilket nummer som väljs så kör den
-     * en random pick metod i en av game, movie och music listorna som väljer ett inlägg
-     * och skriver sedan ut den information för det.
+     * en random pick metod i en av ControllerGame, ControllerMovie och ControllerMusic listorna
+     * som väljer ett inlägg och skriver sedan ut den information för det.
      */
     public static void RandomPick () {
         int pick = (int) (1 + Math.random() * 3);
@@ -46,6 +46,9 @@ public class Entertainment {
              controllerMusic.RandomMusic(); }
     }
 
+    /**
+     * Printar ut menyn för main menu.
+     */
     public static void printMainManu() {
     System.out.println("----------MAIN MENU----------");
     System.out.println("0. Show main Menu");

@@ -17,7 +17,9 @@ public class Game extends Entertainment {
 
     public String getPlatform() { return platform; }
     public void setPlatform(String platform) { this.platform = platform; }
-
+    /**
+     * Printar ut menyn för Game.
+     */
     public static void printMenuGames() {
         System.out.println("--------->GAMES MENU<---------");
         System.out.println("0. Show Games Menu");
@@ -30,7 +32,16 @@ public class Game extends Entertainment {
         System.out.println("7. Back");
         System.out.println("--------------<>--------------");
     }
-
+    /**
+     * En metod som används för att skapa ett inlägg i gamesList
+     * @param name representerar String name i ArrayList
+     * @param genre representerar String genre i ArrayList
+     * @param year representerar String year i ArrayList
+     * @param rating representerar String rating i ArrayList
+     * @param devName representerar String devName i ArrayList
+     * @param platform representerar String platform i ArrayList
+     * @return returnerar nya värden i listan.
+     */
     public static Game createGame (String name, String genre, String year, String rating, String devName, String platform) {
         return new Game(name, genre, year, rating, devName, platform);
     }

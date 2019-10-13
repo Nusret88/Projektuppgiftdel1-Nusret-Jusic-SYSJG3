@@ -1,7 +1,15 @@
 package com.projekt;
 
 import java.util.Scanner;
-
+/** Programmet låter användaren lägga in spel, film eller musik i respektive lista.
+ * Det användaren kan göra är att lägga in ett inlägg i en av listorna, söka efter något som finns i en av listorna,
+ * radera något från listorna, modifiera något i listorna eller lägga till en av inläggen till favorit listan.
+ * i både main menu och favorite menu finns det också en random pick som väljer ut ett inlägg slumpmässigt.
+ *
+ * @author Nusret Jusic
+ * @version 1.0
+ * @since   2019-10-10
+ */
 public class ProjektDel1 {
 
     private static Scanner scan = new Scanner(System.in);
@@ -10,19 +18,14 @@ public class ProjektDel1 {
     private static ControllerMusic controllerMusic = new ControllerMusic ();
     private static ControllerFavorite controllerFavorite = new ControllerFavorite ();
 
-    /** Meny för att ta sig in till andra menyer med listor
-     * där man kan skapa inlägg i listorna och spara sina favoriter i favorit listan
-     *
-     * @author Nusret Jusic
-     * @version 1.0
-     * @since   2019-10-08
-     */
 
     public static void main(String[] args) {
 ProjektDel1.MainMenu();
-
     }
 
+    /**
+     * En switch meny för main menu som sedan länkas i andra klasser samt public static void main.
+     */
     public static void MainMenu () {
         boolean exit = false;
         int choices;
@@ -62,11 +65,11 @@ ProjektDel1.MainMenu();
     }
 
     /**
-     * addNewGame, addNewMovie och addNewMusic lägger till ett inlägg i respective lista
-     * med information. Alla tre listorna har 4 variabler gemensamt med en eller två unika för
-     * sin lista. Rating är alltid i int och konverteras till String senare för att kunna tvinga
-     * valet av 1-10 i listan, om svaret är högre skrivs 10 in som max och om svaret är mindre än 1 skrivs 1 in.
-     * Om användaren skriver in ett String svar så krashar programmet.
+     * addNewGame låter användaren skriva in 5 String variabler som sedan läggs in i gameList.
+     * Rating är en int variabel för att lätt kunna begrännsa spelaren till ett tal mellan 1-10.
+     * Om användaren skriver in högre än 10 blir värdet 10 och om användaren skriver in lägre än 1 blir det 1.
+     * Om namnet inte existerar i listan sparas denna information och int variabeln converteras till String.
+     * När all information är insatt skrivs det ut på skärmen för användaren att se.
      */
     public static void addNewGame () {
         System.out.print("\nGame name: ");
@@ -99,16 +102,24 @@ ProjektDel1.MainMenu();
                     " \nRating: " + rating + "/10" +
                     " \nDeveloper name: " + devname +
                     " \nGame platform: " + platform);
-            System.out.println("-------------<>--------------\n\n");
         } else {
             System.out.println(name + " already exist.");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show game menu");
+            System.out.println("-------------<>--------------");
         }
         System.out.println("-------------><--------------");
         System.out.println("0. Show game menu");
         System.out.println("-------------<>--------------");
     }
-
-    public static void addNewMovie () { // loopar i all oändlighet
+    /**
+     * addNewMovie låter användaren skriva in 5 String variabler som sedan läggs in i gameList.
+     * Rating är en int variabel för att lätt kunna begrännsa spelaren till ett tal mellan 1-10.
+     * Om användaren skriver in högre än 10 blir värdet 10 och om användaren skriver in lägre än 1 blir det 1.
+     * Om namnet inte existerar i listan sparas denna information och int variabeln converteras till String.
+     * När all information är insatt skrivs det ut på skärmen för användaren att se.
+     */
+    public static void addNewMovie () {
         System.out.print("\nNovie name: ");
         String name = scan.nextLine();
         System.out.print("\nMovie ganre: ");
@@ -135,15 +146,23 @@ ProjektDel1.MainMenu();
                     " \nRelease date: " + year +
                     " \nRating: " + rating + "/10" +
                     " \nLength: " + length);
-            System.out.println("-------------<>--------------\n\n");
         } else {
             System.out.println(name + " already exist.");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show movie menu");
+            System.out.println("-------------<>--------------");
         }
         System.out.println("-------------><--------------");
         System.out.println("0. Show movie menu");
         System.out.println("-------------<>--------------");
     }
-
+    /**
+     * addNewMusic låter användaren skriva in 5 String variabler som sedan läggs in i gameList.
+     * Rating är en int variabel för att lätt kunna begrännsa spelaren till ett tal mellan 1-10.
+     * Om användaren skriver in högre än 10 blir värdet 10 och om användaren skriver in lägre än 1 blir det 1.
+     * Om namnet inte existerar i listan sparas denna information och int variabeln converteras till String.
+     * När all information är insatt skrivs det ut på skärmen för användaren att se.
+     */
     public static void addNewMusic () {
         System.out.print("\nSinger/ band name: ");
         String name = scan.nextLine();
@@ -174,9 +193,11 @@ ProjektDel1.MainMenu();
                     " \nRating: " + rating + "/10" +
                     " \nLength: " + album +
                     " \nTracks: " + tracks);
-            System.out.println("-------------<>--------------\n\n");
         } else {
             System.out.println(name + " already exist.");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show music menu");
+            System.out.println("-------------<>--------------");
         }
         System.out.println("-------------><--------------");
         System.out.println("0. Show music menu");
@@ -186,7 +207,7 @@ ProjektDel1.MainMenu();
 
     /**
      * Letar upp ett namn i gamesList och om det finns skickar den namn, genre, year och rating till favorites
-     * tillsammans med en ny varibel som heter type och blir GAMES för spel, MOVIE för film och MUSIC för musik
+     * tillsammans med en ny varibel som heter type och blir GAMES för spel.
      */
         public static void addFavoriteGame () {
             System.out.print("\nGame name: ");
@@ -194,6 +215,9 @@ ProjektDel1.MainMenu();
             Game existingGame = controllerGame.searchGame(name);
             if (existingGame == null) {
                 System.out.println("Game not found");
+                System.out.println("-------------><--------------");
+                System.out.println("0. Show game menu");
+                System.out.println("-------------<>--------------");
                 return;
             }
             String type = "GAME";
@@ -204,23 +228,34 @@ ProjektDel1.MainMenu();
             Favorite newFavorite = Favorite.createFavorite(type, name, genre, year, rating);
 
             if (controllerFavorite.addNewFavorite(newFavorite)) {
+                System.out.println("------------->ADDED<--------------");
                 System.out.println(type + "\nNamn: " + name +
                         ", \nGenre: " + genre +
                         ", \nRelease date: " + year +
                         ", \nRating: " + rating + "/10");
             } else {
                 System.out.println("Couldn't add " + name + " because it already exist.");
+                System.out.println("-------------><--------------");
+                System.out.println("0. Show game menu");
+                System.out.println("-------------<>--------------");
             }
-            System.out.println("-------------><--------------");
+            System.out.println("----------------><----------------");
             System.out.println("0. Show game menu");
-            System.out.println("-------------<>--------------");
+            System.out.println("----------------<>----------------");
         }
+    /**
+     * Letar upp ett namn i gamesList och om det finns skickar den namn, genre, year och rating till favorites
+     * tillsammans med en ny varibel som heter type och blir MOVIE för film.
+     */
     public static void addFavoriteMovie () {
         System.out.print("\nMovie name: ");
         String name = scan.nextLine();
         Movie existingMovie = controllerMovie.searchMovie(name);
         if (existingMovie == null) {
             System.out.println("Movie not found");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show movie menu");
+            System.out.println("-------------<>--------------");
             return;
         }
         String type = "MOVIE";
@@ -231,24 +266,34 @@ ProjektDel1.MainMenu();
         Favorite newFavorite = Favorite.createFavorite(type, name, genre, year, rating);
 
         if (controllerFavorite.addNewFavorite(newFavorite)) {
+            System.out.println("------------->ADDED<--------------");
             System.out.println(type + "\nNamn: " + name +
                     ", \nGenre: " + genre +
                     ", \nRelease date: " + year +
                     ", \nRating: " + rating + "/10");
         } else {
             System.out.println("Couldn't add " + name + " because it already exist.");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show movie menu");
+            System.out.println("-------------<>--------------");
         }
-        System.out.println("-------------><--------------");
-        System.out.println("0. Show game menu");
-        System.out.println("-------------<>--------------");
+        System.out.println("----------------><----------------");
+        System.out.println("0. Show movie menu");
+        System.out.println("----------------<>----------------");
     }
-
+    /**
+     * Letar upp ett namn i gamesList och om det finns skickar den namn, genre, year och rating till favorites
+     * tillsammans med en ny varibel som heter type och blir MUSIC för musik.
+     */
     public static void addFavoriteMusic () {
         System.out.print("\nMusic name: ");
         String name = scan.nextLine();
         Music existingMusic = controllerMusic.searchMusic(name);
         if (existingMusic == null) {
             System.out.println("Music not found");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show music menu");
+            System.out.println("-------------<>--------------");
             return;
         }
         String type = "MUSIC";
@@ -259,22 +304,27 @@ ProjektDel1.MainMenu();
         Favorite newFavorite = Favorite.createFavorite(type, name, genre, year, rating);
 
         if (controllerFavorite.addNewFavorite(newFavorite)) {
+            System.out.println("------------->ADDED<--------------");
             System.out.println(type + "\nNamn: " + name +
                     ", \nGenre: " + genre +
                     ", \nRelease date: " + year +
                     ", \nRating: " + rating + "/10");
         } else {
             System.out.println("Couldn't add " + name + " because it already exist.");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show music menu");
+            System.out.println("-------------<>--------------");
         }
-        System.out.println("-------------><--------------");
-        System.out.println("0. Show game menu");
-        System.out.println("-------------<>--------------");
+        System.out.println("----------------><----------------");
+        System.out.println("0. Show music menu");
+        System.out.println("----------------<>----------------");
     }
 
 
 
     /**
-     * Söker upp ett spel och printar ut information om det
+     * Använder searchGame metoden för att leta upp ett spel i listan och om det hittas printars den sparade informationen ut.
+     * Hittas det sökta namnet i listan medelas användaren om det med en System.out.println.
      */
         public static void searchGame() {
             System.out.println("Search for a game in the list");
@@ -282,6 +332,9 @@ ProjektDel1.MainMenu();
             Game existingGame = controllerGame.searchGame(name);
             if (existingGame == null) {
                 System.out.println("Game not found");
+                System.out.println("-------------><--------------");
+                System.out.println("0. Show game menu");
+                System.out.println("-------------<>--------------");
             }
             System.out.println("-------------><--------------");
             System.out.println("\nName: " + existingGame.getName() +
@@ -291,57 +344,86 @@ ProjektDel1.MainMenu();
                     + "\n\tDeveloper: " + existingGame.getDevName()
                     + "\n\tPlatform: " + existingGame.getPlatform());
             System.out.println("-------------<>--------------");
-
-            //ersätta denna med en metod istället
-            System.out.println("\n\n-------------><--------------");
             System.out.println("0. Show game menu");
             System.out.println("-------------<>--------------");
         }
-
+    /**
+     * Använder searchMovie metoden för att leta upp en film i listan och om det hittas printars den sparade informationen ut.
+     * Hittas det sökta namnet i listan medelas användaren om det med en System.out.println.
+     */
     public static void searchMovie() {
-        System.out.println("Search for a game in the list");
+        System.out.println("Search for a movie in the list");
         String name = scan.nextLine();
         Movie existingMovie = controllerMovie.searchMovie(name);
         if (existingMovie == null) {
-            System.out.println("Game not found");
+            System.out.println("Movie not found");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show movie menu");
+            System.out.println("-------------<>--------------");
         }
+        System.out.println("-------------><--------------");
         System.out.println("\nName: " + existingMovie.getName() +
                 "\n\tGenre: " + existingMovie.getGenre()
                 + "\n\tRelease Date: " + existingMovie.getYear()
                 + "\n\tRating: " + existingMovie.getRating() + "/10"
                 + "\n\tDeveloper: " + existingMovie.getMovieLength());
+        System.out.println("-------------<>--------------");
+        System.out.println("0. Show movie menu");
+        System.out.println("-------------<>--------------");
     }
-
+    /**
+     * Använder searchMusic metoden för att leta upp en songare eller ett band i listan och om det hittas printars den sparade informationen ut.
+     * Hittas det sökta namnet i listan medelas användaren om det med en System.out.println.
+     */
     public static void searchMusic() {
         System.out.println("Search for a music in the list");
         String name = scan.nextLine();
         Music existingMusic = controllerMusic.searchMusic(name);
         if (existingMusic == null) {
             System.out.println("Music not found");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show music menu");
+            System.out.println("-------------<>--------------");
         }
+        System.out.println("-------------><--------------");
         System.out.println("\nName: " + existingMusic.getName() +
                 "\n\tGenre: " + existingMusic.getGenre()
                 + "\n\tRelease Date: " + existingMusic.getYear()
                 + "\n\tRating: " + existingMusic.getRating() + "/10"
                 + "\n\tAlbum: " + existingMusic.getAlbum()
                 + "\n\tTracks: " + existingMusic.getTracks());
+        System.out.println("-------------<>--------------");
+        System.out.println("0. Show music menu");
+        System.out.println("-------------<>--------------");
     }
-
+    /**
+     * Använder searchFavorite metoden för att leta upp ett namn i listan och om det hittas printars den sparade informationen ut.
+     * Hittas det sökta namnet i listan medelas användaren om det med en System.out.println.
+     */
     public static void searchFavorite() {
-        System.out.println("Search for a game in the list");
+        System.out.println("Search for a favorite in the list");
         String name = scan.nextLine();
         Favorite existingFavorite = controllerFavorite.searchFavorite(name);
         if (existingFavorite == null) {
-            System.out.println("Game not found");
+            System.out.println("Favorite not found");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show favorite menu");
+            System.out.println("-------------<>--------------");
         }
+        System.out.println("-------------><--------------");
         System.out.println("\nName: " + existingFavorite.getName() +
                 "\n\tGenre: " + existingFavorite.getGenre()
                 + "\n\tRelease Date: " + existingFavorite.getYear()
                 + "\n\tRating: " + existingFavorite.getRating() + "/10");
+        System.out.println("-------------<>--------------");
+        System.out.println("0. Show favorite menu");
+        System.out.println("-------------<>--------------");
     }
 
     /**
-     * Söker upp och låter användaren ersätta spelet och dess information med ny information
+     * Använder sig av metoden searchGame för att hitta ett namn och sedan editGame metoden för
+     * att låta användaren ge den positionen i listan nya variabler.
+     * Hittas det sökta namnet i listan medelas användaren om det med en System.out.println.
      */
     public static void EditGame () {
         System.out.print("What game do you want to Edit?: ");
@@ -349,6 +431,9 @@ ProjektDel1.MainMenu();
         Game existingGame = controllerGame.searchGame(oldName);
         if (existingGame == null) {
             System.out.println("Game doesn't exist");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show game menu");
+            System.out.println("-------------<>--------------");
         }
         System.out.print("\nGame name: ");
         String newName = scan.nextLine();
@@ -380,15 +465,28 @@ ProjektDel1.MainMenu();
                     + newDevname + ", \nGame platform: " + newPlatform);
         } else {
             System.out.println(newName + " already exist.");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show game menu");
+            System.out.println("-------------<>--------------");
         }
+        System.out.println("-------------><--------------");
+        System.out.println("0. Show game menu");
+        System.out.println("-------------<>--------------");
     }
-
+    /**
+     * Använder sig av metoden searchMovie för att hitta ett namn och sedan editMovie metoden för
+     * att låta användaren ge den positionen i listan nya variabler.
+     * Hittas det sökta namnet i listan medelas användaren om det med en System.out.println.
+     */
     public static void EditMovie () {
         System.out.print("What movie do you want to Edit?: ");
         String oldName = scan.nextLine();
         Movie existingMovie = controllerMovie.searchMovie(oldName);
         if (existingMovie == null) {
             System.out.println("Movie doesn't exist");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show movie menu");
+            System.out.println("-------------<>--------------");
         }
         System.out.print("\nMovie name: ");
         String newName = scan.nextLine();
@@ -406,7 +504,7 @@ ProjektDel1.MainMenu();
         }
         scan.nextLine();
 
-        System.out.print("\nWhat is the airtime of the movie?: ");
+        System.out.print("\nWhat is the length of the movie?: ");
         String newLength = scan.nextLine();
 
         Movie newMovie = Movie.createMovie(newName, newGenre, newYear,
@@ -418,15 +516,28 @@ ProjektDel1.MainMenu();
                     + newLength);
         } else {
             System.out.println(newName + " already exist.");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show movie menu");
+            System.out.println("-------------<>--------------");
         }
+        System.out.println("-------------><--------------");
+        System.out.println("0. Show movie menu");
+        System.out.println("-------------<>--------------");
     }
-
+    /**
+     * Använder sig av metoden searchMusic för att hitta ett namn och sedan editMusic metoden för
+     * att låta användaren ge den positionen i listan nya variabler.
+     * Hittas det sökta namnet i listan medelas användaren om det med en System.out.println.
+     */
     public static void EditMusic () {
         System.out.print("What music do you want to Edit?: ");
         String oldName = scan.nextLine();
         Music existingMusic = controllerMusic.searchMusic(oldName);
         if (existingMusic == null) {
             System.out.println("Music doesn't exist");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show music menu");
+            System.out.println("-------------<>--------------");
         }
         System.out.print("\nMusic name: ");
         String newName = scan.nextLine();
@@ -458,11 +569,19 @@ ProjektDel1.MainMenu();
                     + newAlbum + ", \nTracks");
         } else {
             System.out.println(newName + " already exist.");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show music menu");
+            System.out.println("-------------<>--------------");
         }
+        System.out.println("-------------><--------------");
+        System.out.println("0. Show music menu");
+        System.out.println("-------------<>--------------");
     }
 
     /**
-     * Låter användaren ändra i Favorit listan dock utan att listan det inlägget kommer ifrån blir ändrat
+     * Använder sig av metoden searchFavorite för att hitta ett namn och sedan editFavorite metoden för
+     * att låta användaren ge den positionen i listan nya variabler förutom variabeln type.
+     * Hittas det sökta namnet i listan medelas användaren om det med en System.out.println.
      */
     public static void EditFavorite () {
         System.out.print("Which favorite do you want to Edit?: ");
@@ -470,9 +589,12 @@ ProjektDel1.MainMenu();
         Favorite existingFavorite = controllerFavorite.searchFavorite(oldName);
         if (existingFavorite == null) {
             System.out.println("Favorite doesn't exist");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show favorite menu");
+            System.out.println("-------------<>--------------");
         }
-// Switch sats för att välja om nya favoriten är Spel, Film eller Music
         String newType = existingFavorite.getType();
+        // Switch sats för att välja om nya favoriten är Spel, Film eller Music
        /* System.out.println("1. GAME \n2. MOVIE \n3. MUSIC");
         int choices = scan.nextInt();
         scan.nextLine();
@@ -511,11 +633,18 @@ ProjektDel1.MainMenu();
                     + " \nRating: " + newRating + "/10");
         } else {
             System.out.println(newName + " already exist.");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show favorite menu");
+            System.out.println("-------------<>--------------");
         }
+        System.out.println("-------------><--------------");
+        System.out.println("0. Show favorite menu");
+        System.out.println("-------------<>--------------");
     }
 
     /**
-     * Söker upp ett spel och tar bort det från listan med all information till det
+     * Söker upp ett namn i spel-listan genom searchGame metoden och sedan använder RemoveGame
+     * metoden för att ta bort den positionen med all information i från listan.
      */
    public static void RemoveGame() {
        System.out.print("What game do you want to remove?: ");
@@ -523,48 +652,93 @@ ProjektDel1.MainMenu();
        Game existingGame = controllerGame.searchGame(name);
        if (existingGame == null) {
            System.out.println("Game doesn't exist");
+           System.out.println("-------------><--------------");
+           System.out.println("0. Show game menu");
+           System.out.println("-------------<>--------------");
        }
        if (controllerGame.RemoveGame(existingGame)) { System.out.println(); }
-       else { System.out.println("Couldn't remove the game"); }
+       else { System.out.println("Couldn't remove the game");
+           System.out.println("-------------><--------------");
+           System.out.println("0. Show game menu");
+           System.out.println("-------------<>--------------");}
        System.out.println(existingGame.getName() + " has been removed");
+       System.out.println("-------------><--------------");
+       System.out.println("0. Show game menu");
+       System.out.println("-------------<>--------------");
    }
-
+    /**
+     * Söker upp ett namn i film-listan genom searchMovie metoden och sedan använder RemoveMovie
+     * metoden för att ta bort den positionen med all information i från listan.
+     */
    public static void RemoveMovie() {
        System.out.print("What movie do you want to remove?: ");
        String name = scan.nextLine();
        Movie existingMovie = controllerMovie.searchMovie(name);
        if (existingMovie == null) {
            System.out.println("Movie doesn't exist");
+           System.out.println("-------------><--------------");
+           System.out.println("0. Show movie menu");
+           System.out.println("-------------<>--------------");
        }
-       if (controllerMovie.RemoveGame(existingMovie)) { System.out.println(); }
-       else { System.out.println("Couldn't remove the movie"); }
+       if (controllerMovie.RemoveMovie(existingMovie)) { System.out.println(); }
+       else { System.out.println("Couldn't remove the movie");
+           System.out.println("-------------><--------------");
+           System.out.println("0. Show movie menu");
+           System.out.println("-------------<>--------------");}
        System.out.println(existingMovie.getName() + " has been removed");
+       System.out.println("-------------><--------------");
+       System.out.println("0. Show movie menu");
+       System.out.println("-------------<>--------------");
    }
-
+    /**
+     * Söker upp ett namn i musik-listan genom searchMusic metoden och sedan använder RemoveMusic
+     * metoden för att ta bort den positionen med all information i från listan.
+     */
     public static void RemoveMusic() {
         System.out.print("What singer/ band do you want to remove?: ");
         String name = scan.nextLine();
         Music existingMusic = controllerMusic.searchMusic(name);
         if (existingMusic == null) {
             System.out.println("Singer/ band doesn't exist");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show music menu");
+            System.out.println("-------------<>--------------");
         }
         if (controllerMusic.RemoveMusic(existingMusic)) { System.out.println(); }
-        else { System.out.println("Couldn't remove the singer/ band"); }
+        else { System.out.println("Couldn't remove the singer/ band");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show music menu");
+            System.out.println("-------------<>--------------");}
         System.out.println(existingMusic.getName() + " has been removed");
+        System.out.println("-------------><--------------");
+        System.out.println("0. Show music menu");
+        System.out.println("-------------<>--------------");
     }
-
+    /**
+     * Söker upp ett namn i favorit-listan genom searchFavorite metoden och sedan använder RemoveFavorite
+     * metoden för att ta bort den positionen med all information i från listan.
+     */
    public static void RemoveFavorite() {
        System.out.print("What favorite do you want to remove?: ");
        String name = scan.nextLine();
        Favorite existingFavorite = controllerFavorite.searchFavorite(name);
        if (existingFavorite == null) {
            System.out.println("Favorite doesn't exist");
+           System.out.println("-------------><--------------");
+           System.out.println("0. Show favorite menu");
+           System.out.println("-------------<>--------------");
        }
        if (controllerFavorite.RemoveFavorite(existingFavorite)) { System.out.println(); }
        else {
            System.out.println("Couldn't remove the favorite");
+           System.out.println("-------------><--------------");
+           System.out.println("0. Show favorite menu");
+           System.out.println("-------------<>--------------");
        }
        System.out.println(existingFavorite.getName() + " has been removed");
+       System.out.println("-------------><--------------");
+       System.out.println("0. Show favorite menu");
+       System.out.println("-------------<>--------------");
    }
 
 

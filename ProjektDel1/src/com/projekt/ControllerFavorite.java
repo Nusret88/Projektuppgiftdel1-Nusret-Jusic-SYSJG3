@@ -19,7 +19,6 @@ public class ControllerFavorite {
     public static void menuFavorite () {
         boolean back4 = false;
         Favorite.printFavoriteMenu();
-// kanske ha en metod som printar ut 0. Favorite menu här i menyn isället för i varje
         while (!back4){
                     int menuFavorites = scan.nextInt();
                     scan.nextLine();
@@ -42,7 +41,6 @@ public class ControllerFavorite {
                         case 5:
                             controllerFavorite.sort();
                             back4 = true;
-                            ProjektDel1.MainMenu();
                             break;
                         case 6:
                             controllerFavorite.RandomFavorite();
@@ -56,14 +54,12 @@ public class ControllerFavorite {
             }
 
     /**
-     * Kollar en favorite och dess element Name favoriteList och om det finns returnerar den false.
+     * Kollar efter ett favorite med findFavorite metoden i favoriteList och om det finns returnerar den false.
      * Om den inte finns så returnerar den true där en .add körs för favoriteList och lägger till ett inlägg.
-     *
-     * @param favorite
-     * @return
+     * @param favorite Denna parametern representerar det som söks i listan.
+     * @return Om getName finns i listan returneras false annars returneras true.
      */
     public boolean addNewFavorite (Favorite favorite) {
-        // kolla ifall det finns två elements som är samma eller ej
        if(findFavorite(favorite.getName()) >= 0) {
             System.out.println("The Favorite already exists in the list.");
             return false; }
@@ -71,18 +67,17 @@ public class ControllerFavorite {
         System.out.println("\nNew Favorite has been added:");
         return true; }
 
-    /**
-     *
-     * @param favorite
+    /** Denna metod returnerar index av det som söks.
+     * @param favorite Denna parametern representerar det som söks i listan.
      * @return skickar tillbaka indexen av favorite.
      */
     private int findFavorite (Favorite favorite){ return this.favoriteList.indexOf(favorite); }
 
-    /**
-     *
-     * @param favoriteName letar igenom hela listan med hjälp av en for loop för att hitta det inskrivna namnet.
-     * @return om namnet i position i är samma som det inskrivna namnet så är det hittat och därför returneras i som är nummret i ArrayListan.
-     * Annars returneras -1 vilket inte existerar i listan då den börjar från 0.
+    /** letar igenom hela listan med hjälp av en for loop för att se om det finns ett namn i
+     * listan som är likadant som det inskrivna namnet för att returnera positionen av det.
+     * @param favoriteName Denna parametern representerar det som kommer sökas efter i listan.
+     * @return om det sökta namnet existerar returneras nummret inuti i som representerar positinen i listan.
+     * Annars returneras -1 vilket inte existerar i listan eftersom arraylistor börjar från 0.
      */
     private int findFavorite (String favoriteName) {
         for (int i = 0; i < this.favoriteList.size(); i++) {
@@ -95,9 +90,10 @@ public class ControllerFavorite {
     }
 
     /**
-     *
-     * @param favorite är det som söks efter i Favorites.
-     * @return om det som söks efter finns returneras namnet annars returneras null.
+     *Metoden använder findFavorite metoden för att se om det sökta namnet finns i listan
+     * och om det finns returneras namnet med .getName().
+     * @param favorite Denna parametern representerar det som söks i listan.
+     * @return Om det som söks efter finns returneras namnet annars returneras null.
      */
     public String searchFavorite(Favorite favorite) {
         if(findFavorite(favorite) >= 0) {
@@ -107,8 +103,9 @@ public class ControllerFavorite {
     }
 
     /**
-     *
-     * @param name det inskrivna namnet som söks i listan.
+     * Metoden använder sig av findFavorite metoden för att se om namned som söks existerar i listan och om det gör
+     * så sparas nummret av positionen i en int variabel som sedan returneras med hjälp av get. Om inget hittas returneras null.
+     * @param name Denna parametern representerar namnet som söks i listan.
      * @return returnerar positionen i listan av det inskrivna namnet om det inte hittas returneras null.
      */
     public Favorite searchFavorite(String name) {
@@ -118,11 +115,10 @@ public class ControllerFavorite {
         }
         return null;
     }
-
     /**
-     * En metod som använder sig av två parametrar, en som söks efter i listan och den andra som ska ersätta den gammla.
-     * @param oldFavorite returnerar positionen av det som sökts.
-     * @param newFavorite newFavorite är den nya informationen som ersätter den gammla som hittats.
+     * En metod som använder sig av findFavorite metoden för att hitta positionen som ska ersättas med ny information.
+     * @param oldFavorite Parametern representerar namnet på det som ska ersättas.
+     * @param newFavorite Parametern representerar det nya inlägget som ersätter det gammla.
      * @return om ingen favorit hittas returneras false tillsammans med medelandet "Does not exist"
      * om det hittas används .set för att ersätta den gammla informationen med ny på samma position.
      */
@@ -137,8 +133,9 @@ public class ControllerFavorite {
     }
 
     /**
-     *  En metod som använder sig av findFavorite metoden för att kolla efter det användaren söker efter.
-     * @param favorite använder findFavorite metoden för att hitta det som söks efter.
+     *  En metod som använder sig av findFavorite metoden för att kolla efter det användaren söker efter för att sedan
+     *  ta bort den positionen i listan med .remove.
+     * @param favorite Parametern representerar det som ska tas bort.
      * @return använder .remove för att ta bort den hittade positionen med all information som fanns där.
      */
     public boolean RemoveFavorite(Favorite favorite) {
@@ -167,7 +164,6 @@ public class ControllerFavorite {
         System.out.println("---------------<>----------------"); }
 
         // En simpel sortering dock sorterar den inte nummer över 1-9 så bra, för det behövs en egen compare metod
-
     /**
      * En metod som använder sig av .sort och Comperatorn som redan existerar i bibleoteket för att sortera listan efter namn i bokstavsordning.
      */
@@ -224,12 +220,15 @@ public class ControllerFavorite {
     }
 
     /**
-     * printar ut ett slumpmässigt val ur favorit listan, om listan är tom får användaren svaret "The Favorite list is empty".
+     * printar ut ett slumpmässigt val ur favoriteList, om listan är tom får användaren svaret "The Favorite list is empty".
      */
 
     public void RandomFavorite () {
         if (favoriteList.isEmpty()) {
             System.out.println("The Favorite list is empty");
+            System.out.println("-------------><--------------");
+            System.out.println("0. Show favorite menu");
+            System.out.println("-------------<>--------------");
         } else {
                 int position = (int) (Math.random() * favoriteList.size());
         System.out.println("----------->RANDOM<-----------");
@@ -239,7 +238,10 @@ public class ControllerFavorite {
                                 this.favoriteList.get(position).getGenre() + "\n\tRelease date: " +
                                 this.favoriteList.get(position).getYear() + "\n\tRating: " +
                                 this.favoriteList.get(position).getRating() + "/10");
-        System.out.println("----------->"+ this.favoriteList.get(position).getType() +"<-----------"); } }
+        System.out.println("----------->"+ this.favoriteList.get(position).getType() +"<-----------");
+            System.out.println("0. Show favorite menu");
+            System.out.println("-------------<>--------------");}
+        }
 
 
 }
