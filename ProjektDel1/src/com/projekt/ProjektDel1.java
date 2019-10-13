@@ -8,7 +8,7 @@ import java.util.Scanner;
  *
  * @author Nusret Jusic
  * @version 1.0
- * @since   2019-10-10
+ * @since   2019-10-13
  */
 public class ProjektDel1 {
 
